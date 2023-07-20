@@ -1647,7 +1647,7 @@ PrefabInstance:
     - target: {fileID: 2248803582670311868, guid: 7b34812303fde7d49a17179eb7fccef3, type: 3}
       propertyPath: m_SpriteState.m_SelectedSprite
       value: 
-      objectReference: {fileID: 3945451662944984592, guid: 97d47089170550a4c90e9e44711fcc4f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2248803582670311868, guid: 7b34812303fde7d49a17179eb7fccef3, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
@@ -1655,6 +1655,10 @@ PrefabInstance:
     - target: {fileID: 2985883686315936119, guid: 7b34812303fde7d49a17179eb7fccef3, type: 3}
       propertyPath: m_Name
       value: ExitButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6590257787489093013, guid: 7b34812303fde7d49a17179eb7fccef3, type: 3}
+      propertyPath: m_Name
+      value: ExitText
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b34812303fde7d49a17179eb7fccef3, type: 3}
@@ -1669,6 +1673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OptionsButton
       objectReference: {fileID: 0}
+    - target: {fileID: 534106383889294817, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3945451662944984592, guid: 97d47089170550a4c90e9e44711fcc4f, type: 3}
     - target: {fileID: 6989751691582344969, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1764,10 +1772,14 @@ PrefabInstance:
     - target: {fileID: 7554964247956558071, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
       propertyPath: m_SpriteState.m_SelectedSprite
       value: 
-      objectReference: {fileID: 3945451662944984592, guid: 97d47089170550a4c90e9e44711fcc4f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7554964247956558071, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
       propertyPath: m_SpriteState.m_HighlightedSprite
       value: 
       objectReference: {fileID: 8440510077267459181, guid: 97d47089170550a4c90e9e44711fcc4f, type: 3}
+    - target: {fileID: 7615504178511939082, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
+      propertyPath: m_Name
+      value: OptionsText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 715a0913bc27f10469fec544e45aa5c6, type: 3}
