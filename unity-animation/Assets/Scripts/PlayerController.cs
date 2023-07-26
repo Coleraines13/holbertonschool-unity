@@ -2,52 +2,99 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 6.0f;
+    public CharacterController controller;
+    public float speed = 12f;
     public float rotateSpeed = 6.0f;
-    private float jumpSpeed = 8.0f;
-    public float gravity = 9.0f;
+    private float jumpSpeed = 9f;
+    public float gravity = 18f;
+    private Transform cam;
 
-    private Vector3 moveDirection = Vector3.zero;
+    Vector3 velocity;
+    private Vector3 direction = Vector3.zero;
     private Vector3 startPosition;
-    private Transform player;
+ 
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
 
-    public CharacterController playermao;
-    private int jumps;
-    
+    Animator anim;
 
 
     private void Start()
     {
-        playermao = GetComponent<CharacterController>();
-        player = GetComponent<Transform>();
-        startPosition = player.position;
+        controller = GetComponent<CharacterController>();
+        cam = GetComponent<Transform>();
+        startPosition = cam.position;
+        anim = GetComponentInChildren<Animator>();
+
     }
     private void Update()
     {
-        if (playermao.isGrounded)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        
+        Debug.Log(cam.position.y);
+        if (controller.isGrounded)
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection *= speed;
+            //Control  of animations
+            Debug.Log("TIERRA ON");
+            anim.SetBool("ground",true);
+            anim.SetBool("falling",false);
+            anim.SetBool("Run", false);
+
+
+
+
+            direction = new Vector3(horizontal, 0, vertical).normalized;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            direction = cam.right * direction.x + cam.forward * direction.z;
+            direction.y = 0f;
+            direction *= speed;
 
             if(Input.GetButtonDown("Jump"))
             {
-                moveDirection.y = jumpSpeed;
+                direction.y = jumpSpeed;
+                anim.SetTrigger("Jump");
+                anim.SetBool("ground",false);
             }
+            
         }
         else
         {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), moveDirection.y, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection.x *= speed;
-            moveDirection.z *= speed;
+            Debug.Log("TIERRA OFF");
+            direction = new Vector3(horizontal, direction.y, vertical);
+            direction = transform.TransformDirection(direction);
+
+
+            direction.x *= speed;
+            direction.z *= speed;
+           
         }
-        moveDirection.y -= gravity * Time.deltaTime;
-        playermao.Move(moveDirection * Time.deltaTime);
+        direction.y -= gravity * Time.deltaTime;
+        controller.Move(direction * Time.deltaTime);
+
+
         //if fall restart from sky
-        if (player.position.y < -20)
+        if (cam.position.y < -20)
         {
-           player.position = new Vector3(startPosition.x, startPosition.y + 15, startPosition.z);
+            anim.SetBool("ground", false);
+            anim.SetBool("falling", true);
+            anim.SetBool("Run", false);
+            cam.position = new Vector3(startPosition.x, startPosition.y + 15, startPosition.z);
+        }
+        if (Input.GetKey("w") || Input.GetKey("a") || Input.GetKey("s") || Input.GetKey("d"))
+        {
+           
+            Debug.Log("RUN ON");
+            Debug.Log(vertical);
+            Debug.Log(horizontal);
+            anim.SetBool("Run",true);
+        }
+        else
+        {
+            anim.SetBool("Run",false);
         }
     }    
 }
