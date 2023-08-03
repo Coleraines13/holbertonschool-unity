@@ -1,39 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System.Collections;
 
 public class CutsceneController : MonoBehaviour
 {
     public CinemachineFreeLook[] cameras;
 
-    public CinemachineFreeLook CutsceneCamera;
-    public CinemachineFreeLook EndingCam;
+    public float firstSectionTime = 5f;
+    public float secondSectionTime = 5f;
 
-    public CinemachineFreeLook startCamera;
-    private CinemachineFreeLook currentCam;
 
-    // Start is called before the first frame update
+    private int currentCameraIndex = 0;
+
     private void Start()
     {
-        currentCam = startCamera;
-
-        for (int i = 0; i < cameras.Length; i++)
+        // Ensure all cameras are disabled except for the first one.
+        for (int i = 1; i < cameras.Length; i++)
         {
-            if (cameras[i] == currentCam)
-            {
-                cameras[i].Priority = 20;
-            }
-            else
-            {
-                cameras[i].Priority = 10;
-            }
-        }        
+            // cameras[i].gameObject.SetActive(false);
+            cameras[i].Priority = -1;
+        }
+
+        StartCoroutine(StartCinematic());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    IEnumerator StartCinematic(){
+        cameras[0].Priority = 1;
+        yield return new WaitForSeconds(firstSectionTime);
+        cameras[1].Priority = 2;
+        yield return new WaitForSeconds(secondSectionTime);
+        cameras[2].Priority = 3;
     }
+
 }
