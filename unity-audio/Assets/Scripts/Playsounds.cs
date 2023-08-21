@@ -5,21 +5,15 @@ using UnityEngine;
 public class Playsounds : MonoBehaviour
 {
     public AudioSource MenuSFX;
+    public AudioClip hoverSound;
+    public AudioClip clickSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void HoverSound() {
+        MenuSFX.PlayOneShot(hoverSound);
     }
-
-    public void playThisSoundEffect()
-    {
-        MenuSFX.Play();
+    public void ClickSound() {
+        MenuSFX.PlayOneShot(clickSound);
     }
+ 
 }
