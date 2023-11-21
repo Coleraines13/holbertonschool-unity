@@ -44,7 +44,6 @@ public class Footstepsoundcontroller : MonoBehaviour
             {
                 audioSource.clip = footstepsRunningRock;
             }
-
             audioSource.Play();
         }
     }
