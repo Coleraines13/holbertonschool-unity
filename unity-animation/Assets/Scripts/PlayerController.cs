@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 6.0f;
-    public float rotateSpeed = 6.0f;
     private float jumpSpeed = 8.0f;
     public float gravity = 9.0f;
 
@@ -12,27 +11,61 @@ public class PlayerController : MonoBehaviour
     private Transform player;
 
     public CharacterController playermao;
-    private int jumps;
-    
+    private Animator animator;
 
+    // the boolean variables
+    private bool onGround;
+    private bool isFalling;
+    private bool isRunning;
+    private bool isJumping;
 
     private void Start()
     {
         playermao = GetComponent<CharacterController>();
         player = GetComponent<Transform>();
-        startPosition = player.position;
+        startPosition = new Vector3(player.position.x, 0, player.position.z); // Set the initial y-coordinate to 0
+
+        // this grabs the Animator component
+        animator = GetComponent<Animator>();
     }
+
     private void Update()
     {
-        if (playermao.isGrounded)
+        // this checks if the player is on the ground
+        onGround = playermao.isGrounded;
+
+        // this sets animation parameters based on boolean variables
+        animator.SetBool("OnGround", onGround);
+        animator.SetBool("IsFalling", isFalling);
+        animator.SetBool("IsRunning", isRunning);
+        animator.SetBool("IsJumping", isJumping);
+
+        if (onGround)
         {
+            // this resets vertical velocity when on the ground
+            moveDirection.y = -0.5f; // Slight downward force to stay grounded
+
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
 
-            if(Input.GetButtonDown("Jump"))
+            // this will apply run multiplier if the player is holding the "Run" key
+            isRunning = Input.GetKey(KeyCode.LeftShift);
+
+            if (isRunning)
+            {
+                moveDirection *= speed * 1.5f; // this adjusts the multiplier based on your games requirements
+            }
+
+            // this checks for jumping input
+            if (Input.GetButtonDown("Jump"))
             {
                 moveDirection.y = jumpSpeed;
+                isJumping = true;
+            }
+            else
+            {
+                isJumping = false;
             }
         }
         else
@@ -41,13 +74,21 @@ public class PlayerController : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection.x *= speed;
             moveDirection.z *= speed;
+
+            // this applys gravity only when not on the ground
+            moveDirection.y -= gravity * Time.deltaTime;
+
+            // this checks if the player is falling
+            isFalling = moveDirection.y < 0;
         }
-        moveDirection.y -= gravity * Time.deltaTime;
+
+        // this moves the player
         playermao.Move(moveDirection * Time.deltaTime);
-        //if fall restart from sky
-        if (player.position.y < -20)
+
+        // if the player falls, restart from the sky
+        if (!onGround && isFalling)
         {
-           player.position = new Vector3(startPosition.x, startPosition.y + 15, startPosition.z);
+            player.position = new Vector3(startPosition.x, startPosition.y, startPosition.z);
         }
-    }    
+    }
 }
