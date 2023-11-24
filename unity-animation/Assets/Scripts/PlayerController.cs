@@ -6,7 +6,9 @@ public class PlayerController : MonoBehaviour
     private float jumpSpeed = 8.0f;
     public float gravity = 9.0f;
 
-    private Vector3 moveDirection = Vector3.zero;
+    // Make moveDirection public so it can be accessed externally
+    public Vector3 moveDirection = Vector3.zero;
+
     private Vector3 startPosition;
     private Transform player;
 
@@ -17,7 +19,6 @@ public class PlayerController : MonoBehaviour
     private bool onGround;
     private bool isFalling;
     private bool isRunning;
-    private bool isJumping;
 
     private void Start()
     {
@@ -38,11 +39,9 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("OnGround", onGround);
         animator.SetBool("IsFalling", isFalling);
         animator.SetBool("IsRunning", isRunning);
-        animator.SetBool("IsJumping", isJumping);
 
         if (onGround)
         {
-
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
@@ -58,12 +57,9 @@ public class PlayerController : MonoBehaviour
             // this checks for jumping input
             if (Input.GetButtonDown("Jump"))
             {
+                // Set the jump trigger
+                animator.SetTrigger("Jump");
                 moveDirection.y = jumpSpeed;
-                isJumping = true;
-            }
-            else
-            {
-                isJumping = false;
             }
         }
         else
@@ -77,7 +73,7 @@ public class PlayerController : MonoBehaviour
             moveDirection.y -= gravity * Time.deltaTime;
 
             // this checks if the player is falling
-            isFalling = moveDirection.y < 0;
+            isFalling = moveDirection.y < -15;
         }
 
         // this moves the player
