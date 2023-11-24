@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: ImpactToGettingUp
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: onGround
+    m_ConditionEvent: OnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 993446021803379187}
@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: IdleToJump
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isJumping
+    m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8959161054845950387}
@@ -161,7 +161,7 @@ AnimatorStateTransition:
   m_Name: JumpToIdle
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isJumping
+    m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5774909544516679541}
@@ -186,10 +186,10 @@ AnimatorStateTransition:
   m_Name: RunningToJump
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isRunning
+    m_ConditionEvent: IsRunning
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isJumping
+    m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8959161054845950387}
@@ -214,10 +214,10 @@ AnimatorStateTransition:
   m_Name: JumpToRunning
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isRunning
+    m_ConditionEvent: IsRunning
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isJumping
+    m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4108706618988411767}
@@ -242,7 +242,7 @@ AnimatorStateTransition:
   m_Name: RunningToFalling
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isFalling
+    m_ConditionEvent: IsFalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7980378754606648984}
@@ -267,7 +267,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: onGround
+    m_ConditionEvent: OnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5774909544516679541}
@@ -284,25 +284,25 @@ AnimatorController:
   m_Name: ty
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: onGround
+  - m_Name: OnGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isFalling
+  - m_Name: IsFalling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isRunning
+  - m_Name: IsRunning
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: isJumping
+  - m_Name: IsJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -357,7 +357,7 @@ AnimatorStateTransition:
   m_Name: RunningToIdle
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isRunning
+    m_ConditionEvent: IsRunning
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5774909544516679541}
@@ -382,10 +382,10 @@ AnimatorStateTransition:
   m_Name: JumpToFalling
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isJumping
+    m_ConditionEvent: IsJumping
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isFalling
+    m_ConditionEvent: IsFalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7980378754606648984}
@@ -410,10 +410,10 @@ AnimatorStateTransition:
   m_Name: IdleToRunning
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isRunning
+    m_ConditionEvent: IsRunning
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: onGround
+    m_ConditionEvent: OnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4108706618988411767}
@@ -467,7 +467,7 @@ AnimatorStateTransition:
   m_Name: GettingUpToIdle
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: onGround
+    m_ConditionEvent: OnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5774909544516679541}
@@ -492,7 +492,7 @@ AnimatorStateTransition:
   m_Name: Ru
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isFalling
+    m_ConditionEvent: IsFalling
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5774909544516679541}
@@ -573,10 +573,10 @@ AnimatorStateTransition:
   m_Name: FallingToImpact
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isFalling
+    m_ConditionEvent: IsFalling
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: onGround
+    m_ConditionEvent: OnGround
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7778443387751338528}

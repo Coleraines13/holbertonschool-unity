@@ -42,8 +42,6 @@ public class PlayerController : MonoBehaviour
 
         if (onGround)
         {
-            // this resets vertical velocity when on the ground
-            moveDirection.y = -0.5f; // Slight downward force to stay grounded
 
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
