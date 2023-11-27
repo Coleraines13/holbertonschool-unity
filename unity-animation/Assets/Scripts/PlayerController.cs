@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
             if (isRunning)
             {
-                moveDirection *= speed * 1.5f; // this adjusts the multiplier based on your games requirements
+                moveDirection *= speed * 0.5f; // this adjusts the multiplier based on your games requirements
             }
 
             // this checks for jumping input
