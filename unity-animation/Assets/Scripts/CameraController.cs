@@ -10,11 +10,19 @@ public class CameraController : MonoBehaviour
     public GameObject player;
     public float turnSpeed = 5.0f;
 
+    [SerializeField]
+    GameObject cutSceneCamera;
+    public float cutSceneDelay = 2.2f;
+
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
         t = GetComponent<Transform>();
         offset = t.position - player.transform.position;
+
+        yield return new WaitForSeconds(cutSceneDelay);
+
+        cutSceneCamera.SetActive(false);
     }
 
     // Update is called once per frame
